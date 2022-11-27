@@ -4,7 +4,7 @@
       <nuxt-link class="hover:opacity-50" to="/"><li>Home</li></nuxt-link>
       <nuxt-link class="hover:opacity-50" to="/about"><li>About</li></nuxt-link>
     </nav>
-    <div class="w-full h-screen flex flex-col justify-center align-center text-center">
+    <div class="w-full h-screen flex flex-col justify-center items-center">
       <NuxtPage />
     </div>
   </div>
