@@ -1,13 +1,12 @@
 <script setup>
 const state = reactive({
-  firstName: 'Trent',
-  lastName: 'Brew',
+  msg: '👋🏾'
 })
 </script>
 
 <template>
-  <div class="bg-red">
-    <h1 class="text-xl">Welcome</h1>
-    <p>{{ `${state.firstName} ${state.lastName}` }}</p>
+  <div class="w-full h-screen flex flex-col justify-center align-center text-center">
+    <h1 class="text-3xl font-bold">Welcome</h1>
+    <p>{{ state.msg }}</p>
   </div>
 </template>
