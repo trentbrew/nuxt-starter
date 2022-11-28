@@ -8,13 +8,19 @@ const supabaseKey = config.public.apiKey
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 const { data, error } = await supabase.from('test_data').select()
+
+function handleScroll(e) {
+  console.log('scroll event: ', e)
+}
 </script>
 
 <template>
-  <ul class="text-center w-[60%] h-[60vh] bg-[#ffffff16] mt-[80px] flex flex-col justify-center items-center rounded-md">
-    <li v-for="(item, index) in data" :key="index" class="flex gap-3 mb-3">
-      <p>{{ item.name }}</p>
-      <p class="opacity-50">{{ item.age }}</p>
-    </li>
-  </ul>
+  <main v-scroll="handleScroll">
+    <ul class="text-center w-[60%] h-[60vh] bg-[#ffffff16] mt-[80px] flex flex-col justify-center items-center rounded-md">
+      <li v-for="(item, index) in data" :key="index" class="flex gap-3 mb-3">
+        <p>{{ item.name }}</p>
+        <p class="opacity-50">{{ item.age }}</p>
+      </li>
+    </ul>
+  </main>
 </template>
