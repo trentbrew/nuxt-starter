@@ -14,6 +14,7 @@
     "tailwindcss": "^3.2.4"
   },
   "dependencies": {
+    "@nuxt/cli": "^2.15.8",
     "@supabase/supabase-js": "^2.1.1",
     "daisyui": "^2.42.1"
   }
