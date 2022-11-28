@@ -13,6 +13,14 @@
       }, acc)
     }, [])
   })
+
+  const data = computed(() => {
+    return props.data.map((item) => {
+      return keys.value.map((key) => {
+        return item[key]
+      })
+    })
+  })
 </script>
 
 <template>
@@ -25,7 +33,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, itemIndex) in props.data" :key="itemIndex" class="hover cursor-pointer">
+        <tr v-for="(item, itemIndex) in data" :key="itemIndex" class="hover cursor-pointer">
           <th>{{ itemIndex }}</th>
           <td v-for="(datum, datumIndex) in Object.entries(item)" :key="datumIndex">{{ datum[1] }}</td>
         </tr>
