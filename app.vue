@@ -1,6 +1,6 @@
 <template>
-  <Html>
-    <Head><Title>Kia Rowlett</Title></Head>
+  <Html data-theme="business">
+    <Head><Title>Nuxt 3 Template</Title></Head>
     <div>
       <NuxtLayout />
     </div>
