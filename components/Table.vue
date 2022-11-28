@@ -25,7 +25,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, itemIndex) in props.data" :key="itemIndex">
+        <tr v-for="(item, itemIndex) in props.data" :key="itemIndex" class="hover cursor-pointer">
           <th>{{ itemIndex }}</th>
           <td v-for="(datum, datumIndex) in Object.entries(item)" :key="datumIndex">{{ datum[1] }}</td>
         </tr>
