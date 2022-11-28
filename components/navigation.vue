@@ -1,5 +1,5 @@
 <template>
-  <nav class="fixed navbar bg-base-300">
+  <nav class="fixed top-0 navbar bg-base-300 z-10">
     <div class="navbar-start">
       <a class="btn btn-ghost normal-case text-xl">Nuxt 3 Template</a>
     </div>

@@ -1,13 +1,34 @@
 <template>
-  <section>
-    <h1>Table component</h1>
-    <Table :data="[{name: 'Trent', age: 25}, {name: 'Lo', age: 23}, {name: 'Manman', age: 26}, {name: 'Canny', age: 28}]" />
-  </section>
-  <section>
-    <h1>Radial progress component</h1>
-    <RadialProgress :value="70" />
-  </section>
-  <section>
+  <div class="flexy items-center">
 
-  </section>
+    <section class="mt-[32px]">
+      <h1>Table.vue</h1>
+      <Table :data="[{name: 'Trent', age: 25, status: 'hungry'}, {name: 'Lo', age: 23}, {name: 'Manman', age: 26}, {name: 'Canny', age: 28}]" />
+    </section>
+
+    <section>
+      <h1>RadialProgress.vue</h1>
+      <RadialProgress :value="75" />
+    </section>
+
+  </div>
 </template>
+
+<style scoped>
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff11;
+  padding: 64px;
+  margin-bottom: 64px;
+  border-radius: 6px;
+  height: 75vh;
+  width: 75vw;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 32px;
+}
+</style>

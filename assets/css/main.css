@@ -1,7 +1,7 @@
-/* ------------ global ------------ */
+/* ------------ custom ------------ */
 
 .fullscreen {
-  height: 100vh;
+  height: calc(100vh - 80px);
   width: 100vw;
 }
 
@@ -46,6 +46,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ------------ global ------------ */
+
+h1 {
+  font-size: 1.5rem;
+  width: 100%;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
 
 /* ------------ effects ------------ */
 

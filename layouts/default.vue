@@ -1,8 +1,8 @@
 <template>
   <div>
     <Navigation />
-    <div class="w-full h-screen flex flex-col justify-center items-center">
-      <NuxtPage />
-    </div>
+      <main>
+        <NuxtPage class="mt-[80px]" />
+      </main>
   </div>
 </template>

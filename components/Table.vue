@@ -1,45 +1,33 @@
 <script setup>
-const props = defineProps({
-  data: {
-    type: Object,
-    default: {},
-  },
-})
+  const props = defineProps({
+    data: {
+      type: [Object, Array],
+      default: [],
+    },
+  })
+  const keys = computed(() => {
+    return props.data.reduce((acc, item) => {
+      return Object.keys(item).reduce((acc, key) => {
+        if (!acc.includes(key)) acc.push(key)
+        return acc
+      }, acc)
+    }, [])
+  })
 </script>
 
 <template>
-  <div class="overflow-x-auto">
+  <div class="overflow-x-auto z-0">
     <table class="table w-full">
-      <!-- head -->
       <thead>
         <tr>
-          <th></th>
-          <th>Name</th>
-          <th>Job</th>
-          <th>Favorite Color</th>
+          <th>#</th>
+          <th v-for="(key, keyIndex) in keys" :key="keyIndex">{{ key }}</th>
         </tr>
       </thead>
       <tbody>
-        <!-- row 1 -->
-        <tr>
-          <th>1</th>
-          <td>Cy Ganderton</td>
-          <td>Quality Control Specialist</td>
-          <td>Blue</td>
-        </tr>
-        <!-- row 2 -->
-        <tr>
-          <th>2</th>
-          <td>Hart Hagerty</td>
-          <td>Desktop Support Technician</td>
-          <td>Purple</td>
-        </tr>
-        <!-- row 3 -->
-        <tr>
-          <th>3</th>
-          <td>Brice Swyre</td>
-          <td>Tax Accountant</td>
-          <td>Red</td>
+        <tr v-for="(item, itemIndex) in props.data" :key="itemIndex">
+          <th>{{ itemIndex }}</th>
+          <td v-for="(datum, datumIndex) in Object.entries(item)" :key="datumIndex">{{ datum[1] }}</td>
         </tr>
       </tbody>
     </table>
