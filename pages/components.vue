@@ -1,8 +1,6 @@
 <script setup>
   const supabase = useSupabase()
-  console.log('supabase composable: ', supabase)
   const data = await supabase.getData('test')
-  console.log('data fetched from supabase: ', data)
 </script>
 
 <template>

@@ -11,7 +11,7 @@
       </ul>
     </div>
     <div class="navbar-end">
-      <a class="btn">Log in</a>
+      <NuxtLink to="/auth/login" class="btn">Log in</NuxtLink>
     </div>
   </nav>
 </template>
@@ -22,5 +22,6 @@ li a {
 }
 .router-link-exact-active {
   opacity: 1 !important;
+  background: transparent;
 }
 </style>

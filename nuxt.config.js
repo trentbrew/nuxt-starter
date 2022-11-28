@@ -18,4 +18,10 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  modules: [
+    ['@pinia/nuxt', { autoImports: ['defineStore', ['defineStore', 'definePiniaStore']] }],
+  ],
+  imports: {
+    dirs: ['stores'],
+  }
 })
