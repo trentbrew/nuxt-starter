@@ -16,7 +16,7 @@ function handleScroll(e) {
 
 <template>
   <main v-scroll="handleScroll">
-    <ul class="text-center w-[60%] h-[60vh] bg-[#ffffff16] mt-[80px] flex flex-col justify-center items-center rounded-md">
+    <ul class="flexy mt-[80px] rounded-md">
       <li v-for="(item, index) in data" :key="index" class="flex gap-3 mb-3">
         <p>{{ item.name }}</p>
         <p class="opacity-50">{{ item.age }}</p>

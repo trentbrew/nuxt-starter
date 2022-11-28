@@ -1,6 +1,26 @@
 <template>
-  <nav class="absolute flex justify-center items-center gap-4 w-full border-[#ffffff22] border-b-2 list-none h-[80px]">
-    <nuxt-link class="hover:opacity-50" to="/"><li>Home</li></nuxt-link>
-    <nuxt-link class="hover:opacity-50" to="/about"><li>About</li></nuxt-link>
+  <nav class="fixed navbar bg-base-300">
+    <div class="navbar-start">
+      <a class="btn btn-ghost normal-case text-xl">Nuxt 3 Template</a>
+    </div>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal p-0">
+        <li><NuxtLink to="/">Home</NuxtLink></li>
+        <li><NuxtLink to="/about">About</NuxtLink></li>
+        <li><NuxtLink to="/contact">Contact</NuxtLink></li>
+      </ul>
+    </div>
+    <div class="navbar-end">
+      <a class="btn">Log in</a>
+    </div>
   </nav>
 </template>
+
+<style scoped>
+li a {
+  opacity: 0.4;
+}
+.router-link-exact-active {
+  opacity: 1 !important;
+}
+</style>
