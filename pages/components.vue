@@ -13,6 +13,10 @@
       <h1>RadialProgress.vue</h1>
       <RadialProgress :value="75" />
     </section>
+    <section>
+      <h1>Uploader.vue</h1>
+      <Uploader />
+    </section>
   </div>
 </template>
 

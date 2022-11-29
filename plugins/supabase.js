@@ -8,46 +8,55 @@ export default defineNuxtPlugin(() => {
 
   const supabase = createClient(supabaseUrl, supabaseKey)
 
-  const addData = async (table, data) => {
-    const { data: res, error } = await supabase.from(table).insert(data)
-    if (error) console.log(error)
-    return res
-  }
-
-  const getData = async (table, column) => {
-    const { data: res, error } = await supabase.from(table).select(column ?? '*')
-    if (error) console.log(error)
-    return res
-  }
-
-  const getForeignData = async (table, relation, column) => {
-    const { data: res, error } = await supabase.from(table).select(`${table}, ${relation} (${column ?? ''})`)
-    if (error) console.log(error)
-    return res
-  }
-
-  const updateData = async (table, id, data) => {
-    const { data: res, error } = await supabase.from(table).update(data).match({ id })
-    if (error) console.log(error)
-    return res
-
-  }
-
-  const deleteData = async (table, id) => {
-    const { data: res, error } = await supabase.from(table).delete().match({ id })
-    if (error) console.log(error)
-    return res
+  const api = {
+    addData: async (table, data) => {
+      const { data: res, error } = await supabase.from(table).insert(data)
+      if (error) console.log(error)
+      return res
+    },
+    getData: async (table, column) => {
+      const { data: res, error } = await supabase.from(table).select(column ?? '*')
+      if (error) console.log(error)
+      return res
+    },
+    getForeignData: async (table, column) => {
+      const { data: res, error } = await supabase.from(table).select(`${table}, ${relation} (${column ?? ''})`)
+      if (error) console.log(error)
+      return res
+    },
+    updateData: async (table, id, data) => {
+      const { data: res, error } = await supabase.from(table).update(data).match({ id })
+      if (error) console.log(error)
+      return res
+    },
+    deleteData: async (table, id) => {
+      const { data: res, error } = await supabase.from(table).delete().match({ id })
+      if (error) console.log(error)
+      return res
+    },
+    createBucket: async (name) => {
+      const { data: res, error } = await supabase.storage.createBucket(name)
+      if (error) console.log(error)
+      return res
+    },
+    uploadFile: async (bucket, file) => {
+      const { data: res, error } = await supabase.storage.from(bucket).upload(file.name, file)
+      if (error) console.log(error)
+      return res
+    },
+    downloadFile: async (bucket, file) => {
+      const { data: res, error } = await supabase.storage.from(bucket).download(file)
+      if (error) console.log(error)
+      return res
+    },
+    deleteFile: async (bucket, file) => {
+      const { data: res, error } = await supabase.storage.from(bucket).remove([file])
+      if (error) console.log(error)
+      return res
+    }
   }
 
   return {
-    provide: {
-      supabase: {
-        addData,
-        getData,
-        getForeignData,
-        updateData,
-        deleteData,
-      }
-    },
+    provide: { api },
   }
 })
