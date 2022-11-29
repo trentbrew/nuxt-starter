@@ -9,48 +9,11 @@ export default defineNuxtPlugin(() => {
 
   const select = (table, column) => supabase.from(table).select(column ?? '')
 
-  const operators = {
-    '===': select.eq,
-     '!=': select.neq,
-      '>': select.gt,
-      '>=': select.gte,
-      '<': select.lt,
-      '<=': select.lte,
-     '==': select.like,
-     ':=': select.ilike,
-      '?': select.is,
-     '->': select.in,
-  }
-
-  const parseQuery = (query) => {
-    const [field, operator, value] = query.split(' ')
-    return { field, operator, value }
-  }
-
-  const resolveQuery = (query) => {
-    const { field, operator, value } = parseQuery(query)
-    if (query && Object.keys(operators).includes(operator)) return operators[operator](field, value)
-    else if (!Object.keys(operators).includes(operator)) console.error('😵‍💫 Ope. Invalid query operator.')
-    return []
-  }
-
   const api = {
-    getData: async (table, column, query) => {
-      if (!query) {
-        const { data: res, error } = await select(table, column ?? '*')
-        if (error) {
-          console.log(error)
-          return []
-        }
-        return res
-      } else {
-        const { data: res, error } = await resolveQuery(table, column ?? '*', query)
-        if (error) {
-          console.log(error)
-          return []
-        }
-        return res
-      }
+    getData: async (table, column) => {
+      const { data: res, error } = await select(table, column)
+      if (error) console.log(error)
+      return res
     },
     addData: async (table, data) => {
       const { data: res, error } = await supabase.from(table).insert(data)

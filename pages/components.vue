@@ -1,6 +1,6 @@
 <script setup>
   const supabase = useSupabase()
-  const data = await supabase.getData('test')
+  const data = await supabase.getData('test', '*', 'age === 26')
 </script>
 
 <template>
