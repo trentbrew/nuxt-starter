@@ -5,22 +5,55 @@ export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig()
   const supabaseUrl = config.public.apiBase
   const supabaseKey = config.public.apiKey
-
   const supabase = createClient(supabaseUrl, supabaseKey)
 
+  const select = (table, column) => supabase.from(table).select(column ?? '')
+
+  const operators = {
+    '===': select.eq,
+     '!=': select.neq,
+      '>': select.gt,
+      '>=': select.gte,
+      '<': select.lt,
+      '<=': select.lte,
+     '==': select.like,
+     ':=': select.ilike,
+      '?': select.is,
+     '->': select.in,
+  }
+
+  const parseQuery = (query) => {
+    const [field, operator, value] = query.split(' ')
+    return { field, operator, value }
+  }
+
+  const resolveQuery = (query) => {
+    const { field, operator, value } = parseQuery(query)
+    if (query && Object.keys(operators).includes(operator)) return operators[operator](field, value)
+    else if (!Object.keys(operators).includes(operator)) console.error('😵‍💫 Ope. Invalid query operator.')
+    return []
+  }
+
   const api = {
+    getData: async (table, column, query) => {
+      if (!query) {
+        const { data: res, error } = await select(table, column ?? '*')
+        if (error) {
+          console.log(error)
+          return []
+        }
+        return res
+      } else {
+        const { data: res, error } = await resolveQuery(table, column ?? '*', query)
+        if (error) {
+          console.log(error)
+          return []
+        }
+        return res
+      }
+    },
     addData: async (table, data) => {
       const { data: res, error } = await supabase.from(table).insert(data)
-      if (error) console.log(error)
-      return res
-    },
-    getData: async (table, column) => {
-      const { data: res, error } = await supabase.from(table).select(column ?? '*')
-      if (error) console.log(error)
-      return res
-    },
-    getForeignData: async (table, column) => {
-      const { data: res, error } = await supabase.from(table).select(`${table}, ${relation} (${column ?? ''})`)
       if (error) console.log(error)
       return res
     },
@@ -62,6 +95,8 @@ export default defineNuxtPlugin(() => {
   }
 
   return {
-    provide: { api },
+    provide: {
+      api
+    },
   }
 })
