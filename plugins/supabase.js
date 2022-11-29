@@ -53,6 +53,11 @@ export default defineNuxtPlugin(() => {
       const { data: res, error } = await supabase.storage.from(bucket).remove([file])
       if (error) console.log(error)
       return res
+    },
+    getUrl: async (bucket, file) => {
+      const { data: res, error } = await supabase.storage.from(bucket).getPublicUrl(file)
+      if (error) console.log(error)
+      return res
     }
   }
 
