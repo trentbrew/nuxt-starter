@@ -49,7 +49,11 @@
 
     <section>
       <h1>Text.vue</h1>
-      <InputText v-model="state.text" placeholder="Type here" icon="edit" />
+      <InputText
+        v-model="state.text"
+        placeholder="Join newsletter"
+        icon="mail"
+      />
     </section>
 
     <section>
