@@ -34,7 +34,7 @@
     <div class="input-group">
       <input type="text" placeholder="Search" class="input input-bordered" />
       <button class="btn btn-square">
-        <Icon name="profile" />
+        <Icon name="search" />
       </button>
     </div>
   </div>
