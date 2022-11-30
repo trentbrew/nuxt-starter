@@ -1,6 +1,12 @@
 <script setup>
   const supabase = useSupabase()
-  const data = await supabase.getData('test', '*', 'age === 26')
+  const data = await supabase.getData('test')
+
+  function handleUploading(file) {}
+
+  function handleError(error) {}
+
+  function handleSuccess(data) {}
 </script>
 
 <template>
@@ -15,7 +21,7 @@
     </section>
     <section>
       <h1>Uploader.vue</h1>
-      <Uploader />
+      <Uploader @uploading="handleUploading" @error="handleError" @success="handleSuccess" />
     </section>
   </div>
 </template>
@@ -26,11 +32,9 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff11;
   padding: 64px;
   margin-bottom: 64px;
-  border-radius: 6px;
-  height: 75vh;
+  min-height: 75vh;
   width: 75vw;
 }
 h1 {

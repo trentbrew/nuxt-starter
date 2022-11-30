@@ -11,14 +11,14 @@
       </ul>
     </div>
     <div class="navbar-end">
-      <NuxtLink to="/auth/login" class="btn">Log in</NuxtLink>
+      <NuxtLink to="/auth/login" class="btn rounded">Log in</NuxtLink>
     </div>
   </nav>
 </template>
 
 <style scoped>
 li a {
-  opacity: 0.4;
+  @apply opacity-[0.4] rounded
 }
 .router-link-exact-active {
   opacity: 1 !important;

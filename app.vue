@@ -1,5 +1,5 @@
 <template>
-  <Html data-theme="business">
+  <Html data-theme="dracula">
     <Head><Title>Nuxt 3 Template</Title></Head>
     <div>
       <NuxtLayout />

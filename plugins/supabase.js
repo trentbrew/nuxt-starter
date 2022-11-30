@@ -7,54 +7,76 @@ export default defineNuxtPlugin(() => {
   const supabaseKey = config.public.apiKey
   const supabase = createClient(supabaseUrl, supabaseKey)
 
-  const select = (table, column) => supabase.from(table).select(column ?? '')
+  const select = (table, column) => supabase.from(table).select(column ?? '*')
 
   const api = {
+
+    // data
+
     getData: async (table, column) => {
-      const { data: res, error } = await select(table, column)
+      const { data: res, error } = await select(table, column ?? '*')
       if (error) console.log(error)
       return res
     },
+
     addData: async (table, data) => {
       const { data: res, error } = await supabase.from(table).insert(data)
       if (error) console.log(error)
       return res
     },
+
     updateData: async (table, id, data) => {
       const { data: res, error } = await supabase.from(table).update(data).match({ id })
       if (error) console.log(error)
       return res
     },
+
     deleteData: async (table, id) => {
       const { data: res, error } = await supabase.from(table).delete().match({ id })
       if (error) console.log(error)
       return res
     },
-    createBucket: async (name) => {
-      const { data: res, error } = await supabase.storage.createBucket(name)
+
+    // storage
+
+    createBucket: async (name, isPublic) => {
+      const { data: res, error } = await supabase.storage.createBucket(name, { public: isPublic ?? false })
       if (error) console.log(error)
       return res
     },
+
     uploadFile: async (bucket, file) => {
-      const { data: res, error } = await supabase.storage.from(bucket).upload(file.name, file)
-      if (error) console.log(error)
-      return res
+      console.log('uploading file...')
+      console.log(`bucket: ${bucket}, file: ${file}`)
+
+      supabase.storage.from(bucket).upload(`public/${file.name}`, file).then(res => {
+        console.log('resolved promise from file upload: ', res)
+      }).catch(error => {
+        console.log('something went wrong: ', error)
+      })
+
+      // if (error) console.log(error)
+      // return res
     },
+
     downloadFile: async (bucket, file) => {
       const { data: res, error } = await supabase.storage.from(bucket).download(file)
       if (error) console.log(error)
       return res
     },
+
     deleteFile: async (bucket, file) => {
       const { data: res, error } = await supabase.storage.from(bucket).remove([file])
       if (error) console.log(error)
       return res
     },
+
     getUrl: async (bucket, file) => {
       const { data: res, error } = await supabase.storage.from(bucket).getPublicUrl(file)
       if (error) console.log(error)
       return res
     }
+
   }
 
   return {

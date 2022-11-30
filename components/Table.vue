@@ -5,6 +5,7 @@
       default: [],
     },
   })
+
   const keys = computed(() => {
     return props.data.reduce((acc, item) => {
       return Object.keys(item).reduce((acc, key) => {
@@ -14,13 +15,7 @@
     }, [])
   })
 
-  const data = computed(() => {
-    return props.data.map((item) => {
-      return keys.value.map((key) => {
-        return item[key]
-      })
-    })
-  })
+  const data = computed(() => props.data.map((item) => keys.value.map((key) => item[key])))
 </script>
 
 <template>
@@ -28,14 +23,16 @@
     <table class="table w-full">
       <thead>
         <tr>
-          <th>#</th>
+          <th class="text-[#ffffff24]">#</th>
           <th v-for="(key, keyIndex) in keys" :key="keyIndex">{{ key }}</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(item, itemIndex) in data" :key="itemIndex" class="hover cursor-pointer">
-          <th>{{ itemIndex }}</th>
-          <td v-for="(datum, datumIndex) in Object.entries(item)" :key="datumIndex">{{ datum[1] }}</td>
+          <th class="font-normal text-[#ffffff24]">{{ itemIndex }}</th>
+          <td v-for="(datum, datumIndex) in Object.entries(item)" :key="datumIndex">
+            {{ datum[1] }}
+          </td>
         </tr>
       </tbody>
     </table>

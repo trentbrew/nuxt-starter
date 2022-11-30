@@ -9,7 +9,11 @@ module.exports = {
     "./app.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      borderRadius: {
+        DEFAULT: "8px",
+      }
+    },
   },
   plugins: [
     require("daisyui")
