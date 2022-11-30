@@ -1,5 +1,5 @@
 <template>
-  <nav class="fixed top-0 navbar bg-base-300 z-10">
+  <nav class="fixed top-0 navbar bg-black/[0.4] z-10 backdrop-blur-xl">
     <div class="navbar-start">
       <a class="btn btn-ghost normal-case text-xl">Nuxt 3 Template</a>
     </div>
@@ -17,11 +17,6 @@
 </template>
 
 <style scoped lang="scss">
-li a {
-  @apply opacity-[0.4] rounded
-}
-.router-link-exact-active {
-  opacity: 1 !important;
-  background: transparent;
-}
+li a { @apply opacity-[0.4] rounded active:bg-base-100 active:text-white }
+.router-link-exact-active { @apply opacity-[1] bg-transparent }
 </style>
