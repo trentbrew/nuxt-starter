@@ -3,13 +3,17 @@ import { createClient } from '@supabase/supabase-js'
 
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig()
-  const supabaseUrl = config.public.supabaseUrl
-  const supabaseKey = config.public.supabaseKey
+
+  const supabaseUrl = config.public.apiUrl
+  const supabaseKey = config.public.apiKey
+
   const supabase = createClient(supabaseUrl, supabaseKey)
 
-  const methods = {
+  const api = {
     getData: async (table, column) => {
-      const { data: res, error } = await select(table, column ?? '*')
+      const { data: res, error } = await supabase
+        .from(table)
+        .select(column ?? '*')
       if (error) console.log(error)
       return res
     },
@@ -121,7 +125,7 @@ export default defineNuxtPlugin(() => {
 
   return {
     provide: {
-      methods,
+      api,
     },
   }
 })

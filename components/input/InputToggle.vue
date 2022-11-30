@@ -3,7 +3,7 @@
 
   const props = defineProps({
     modelValue: {
-      type: String,
+      type: Boolean,
       default: '',
     },
     text: {

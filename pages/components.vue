@@ -6,6 +6,7 @@
     progress: 75,
     toggle: false,
     text: '',
+    search: '',
   })
 
   function handleUploading(file) {
@@ -31,10 +32,12 @@
       <h1>Table.vue</h1>
       <Table :data="data" />
     </section>
+
     <section>
       <h1>RadialProgress.vue</h1>
       <RadialProgress :value="state.progress" />
     </section>
+
     <section>
       <h1>InputFile.vue</h1>
       <InputFile
@@ -43,12 +46,19 @@
         @success="handleSuccess"
       />
     </section>
+
     <section>
-      <h1>InputText.vue</h1>
-      <InputText v-model="state.text" />
+      <h1>Text.vue</h1>
+      <InputText v-model="state.text" placeholder="Type here" icon="edit" />
     </section>
+
     <section>
-      <h1>InputToggle.vue</h1>
+      <h1>Search.vue</h1>
+      <InputSearch v-model="state.search" />
+    </section>
+
+    <section>
+      <h1>Toggle.vue</h1>
       <InputToggle v-model="state.toggle" />
     </section>
   </div>
