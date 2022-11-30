@@ -5,6 +5,14 @@
       default: '',
       requred: true,
     },
+    light: {
+      type: Boolean,
+      default: true,
+    },
+    dark: {
+      type: Boolean,
+      default: false,
+    },
   })
 
   const icons = {
@@ -76,5 +84,5 @@
 </script>
 
 <template>
-  <div v-html="icons[name]"></div>
+  <div v-html="icons[name]" :class="`${props.color ? props.color[0] == '#' || props.color.substring(0, 3) == 'rgb' ? `[${props.color}]` : `${props.color}` : ''}`"></div>
 </template>
