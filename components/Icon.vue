@@ -5,13 +5,9 @@
       default: '',
       requred: true,
     },
-    light: {
-      type: Boolean,
-      default: true,
-    },
-    dark: {
-      type: Boolean,
-      default: false,
+    color: {
+      type: String,
+      default: '',
     },
   })
 
@@ -84,5 +80,5 @@
 </script>
 
 <template>
-  <div v-html="icons[name]" :class="`${props.color ? props.color[0] == '#' || props.color.substring(0, 3) == 'rgb' ? `[${props.color}]` : `${props.color}` : ''}`"></div>
+  <div v-html="icons[name]" :style="`${props.color ? `color: ${props.color}` : ''}`"></div>
 </template>
