@@ -16,7 +16,7 @@
   </nav>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 li a {
   @apply opacity-[0.4] rounded
 }
