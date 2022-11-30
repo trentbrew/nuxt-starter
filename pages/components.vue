@@ -2,15 +2,21 @@
   const supabase = useSupabase()
   const data = await supabase.getData('test')
 
-  function handleUploading(file) {}
+  function handleUploading(file) {
+    console.log('uploading...')
+  }
 
-  function handleError(error) {}
+  function handleError(error) {
+    console.log('something went wrong: ', error)
+  }
 
-  function handleSuccess(data) {}
+  function handleSuccess(data) {
+    console.log('file upload success: ', data)
+  }
 </script>
 
 <template>
-  <div class="flexy items-center">
+  <div class="flexy">
     <section class="mt-[32px]">
       <h1>Table.vue</h1>
       <Table :data="data" />

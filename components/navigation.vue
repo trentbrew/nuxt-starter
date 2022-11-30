@@ -11,7 +11,7 @@
       </ul>
     </div>
     <div class="navbar-end">
-      <NuxtLink to="/auth/login" class="btn rounded">Log in</NuxtLink>
+      <NuxtLink to="/auth/signup" class="btn rounded">Sign Up</NuxtLink>
     </div>
   </nav>
 </template>

@@ -2,7 +2,6 @@ import { defineNuxtPlugin } from '#app'
 import { createClient } from '@supabase/supabase-js'
 
 export default defineNuxtPlugin(() => {
-
   const config = useRuntimeConfig()
   const supabaseUrl = config.public.apiBase
   const supabaseKey = config.public.apiKey
@@ -11,33 +10,118 @@ export default defineNuxtPlugin(() => {
   const select = (table, column) => supabase.from(table).select(column ?? '*')
 
   const api = {
-
     // data
-    getData: (table, column) => select(table, column ?? '*').then(res => res.data),
-    addData: (table, data) => supabase.from(table).insert(data).then(res => res.data),
-    updateData: (table, id, data) => supabase.from(table).update(data).match({ id }).then(res => res.data),
-    deleteData: (table, id) => supabase.from(table).delete().match({ id }).then(res => res.data),
+
+    getData: async (table, column) => {
+      const { data: res, error } = await select(table, column ?? '*')
+      if (error) console.log(error)
+      return res
+    },
+
+    addData: async (table, data) => {
+      const { data: res, error } = await supabase.from(table).insert(data)
+      if (error) console.log(error)
+      return res
+    },
+
+    updateData: async (table, id, data) => {
+      const { data: res, error } = await supabase
+        .from(table)
+        .update(data)
+        .match({ id })
+      if (error) console.log(error)
+      return res
+    },
+
+    deleteData: async (table, id) => {
+      const { data: res, error } = await supabase
+        .from(table)
+        .delete()
+        .match({ id })
+      if (error) console.log(error)
+      return res
+    },
 
     // storage
-    createBucket: (name, isPublic) => supabase.storage.createBucket(name, { public: isPublic ?? false }).then(res => res.data),
-    uploadFile: (bucket, file) => supabase.storage.from(bucket).upload(`public/${file.name}`, file).then(res => res.data),
-    downloadFile: (bucket, file) => supabase.storage.from(bucket).download(file).then(res => res.data),
-    deleteFile: (bucket, file) => supabase.storage.from(bucket).remove([file]).then(res => res.data),
-    getUrl: (bucket, file) => supabase.storage.from(bucket).getPublicUrl(file).then(res => res.data),
+
+    createBucket: async (name, isPublic) => {
+      const { data: res, error } = await supabase.storage.createBucket(name, {
+        public: isPublic ?? false,
+      })
+      if (error) console.log(error)
+      return res
+    },
+
+    uploadFile: async (bucket, file) => {
+      const { data: res, error } = supabase.storage
+        .from(bucket)
+        .upload(`public/${file.name}`, file)
+      if (error) console.log(error)
+      return res
+    },
+
+    downloadFile: async (bucket, file) => {
+      const { data: res, error } = await supabase.storage
+        .from(bucket)
+        .download(file)
+      if (error) console.log(error)
+      return res
+    },
+
+    deleteFile: async (bucket, file) => {
+      const { data: res, error } = await supabase.storage
+        .from(bucket)
+        .remove([file])
+      if (error) console.log(error)
+      return res
+    },
+
+    getUrl: async (bucket, file) => {
+      const { data: res, error } = await supabase.storage
+        .from(bucket)
+        .getPublicUrl(file)
+      if (error) console.log(error)
+      return res
+    },
 
     // auth
-    signUp: (email, password) => supabase.auth.signUp({ email, password }).then(res => res.data),
-    signIn: (email, password) => supabase.auth.signIn({ email, password }).then(res => res.data),
-    signOut: () => supabase.auth.signOut().then(res => res.data),
+
+    signUp: async (email, password) => {
+      const { data: res, error } = await supabase.auth.signUp({
+        email,
+        password,
+      })
+      if (error) console.log(error)
+      return res
+    },
+
+    signIn: async (email, password) => {
+      const { data: res, error } = await supabase.auth.signIn({
+        email,
+        password,
+      })
+      if (error) console.log(error)
+      return res
+    },
+
+    signOut: async () => {
+      const { data: res, error } = await supabase.auth.signOut()
+      if (error) console.log(error)
+      return res
+    },
 
     // user
-    getUser: () => supabase.auth.getUser().then(res => res.data),
 
+    getUser: async () => {
+      const { data: user, error } = await supabase.auth.getUser()
+      if (error) console.log(error)
+      return user
+    },
   }
 
   return {
     provide: {
-      api
+      api,
     },
   }
 })
