@@ -3,15 +3,11 @@ import { createClient } from '@supabase/supabase-js'
 
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig()
-  const supabaseUrl = config.public.apiBase
-  const supabaseKey = config.public.apiKey
+  const supabaseUrl = config.public.supabaseUrl
+  const supabaseKey = config.public.supabaseKey
   const supabase = createClient(supabaseUrl, supabaseKey)
 
-  const select = (table, column) => supabase.from(table).select(column ?? '*')
-
-  const api = {
-    // data
-
+  const methods = {
     getData: async (table, column) => {
       const { data: res, error } = await select(table, column ?? '*')
       if (error) console.log(error)
@@ -95,33 +91,37 @@ export default defineNuxtPlugin(() => {
       return res
     },
 
+    signInWithMagicLink: async email => {
+      await supabase.auth
+        .signInWithOtp({
+          email: email.value,
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+
     signIn: async (email, password) => {
       const { data: res, error } = await supabase.auth.signIn({
         email,
         password,
       })
       if (error) console.log(error)
+      else alert('Check your email for the login link!')
       return res
     },
 
     signOut: async () => {
       const { data: res, error } = await supabase.auth.signOut()
       if (error) console.log(error)
+      else alert('Successfully signed out')
       return res
-    },
-
-    // user
-
-    getUser: async () => {
-      const { data: user, error } = await supabase.auth.getUser()
-      if (error) console.log(error)
-      return user
     },
   }
 
   return {
     provide: {
-      api,
+      methods,
     },
   }
 })

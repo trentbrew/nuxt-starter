@@ -1,42 +1,37 @@
 <script setup>
-  const supabase = useSupabase()
+  import { createClient } from '@supabase/supabase-js'
+
+  const config = useRuntimeConfig()
+  const supabaseUrl = config.public.supabaseUrl
+  const supabaseKey = config.public.supabaseKey
+  const supabase = createClient(supabaseUrl, supabaseKey)
 
   const state = reactive({
-    signUp: {
-      email: '',
-      password: '',
-    },
+    email: '',
+    loading: false,
   })
 
-  async function signUp() {
-    console.log('creating user with email: ', state.signUp.email)
-    const data = await supabase.signUp(
-      state.signUp.email,
-      state.signUp.password
-    )
-    console.log('email signup response: ', data)
+  async function handleLogin() {
+    try {
+      state.loading = true
+      const { error } = await supabase.auth.signInWithOtp({
+        email: state.email,
+      })
+      if (error) throw error
+      alert('Check your email for the login link!')
+    } catch (error) {
+      alert(error.error_description || error.message)
+    } finally {
+      state.loading = false
+    }
   }
 </script>
 
 <template>
   <div class="flexy fullscreen">
-    <form class="flexy gap-6">
-      <input
-        v-model="state.signUp.username"
-        type="text"
-        name="email"
-        class="input input-bordered"
-        placeholder="Email"
-      />
-      <input
-        autocomplete="new-password"
-        v-model="state.signUp.password"
-        type="password"
-        name="password"
-        class="input input-bordered"
-        placeholder="Password"
-      />
-      <button @click="signUp" class="btn btn-primary">Create Account</button>
+    <form class="flexy gap-6" @submit.prevent="handleLogin">
+      <InputText v-model="state.email" placeholder="Email" />
+      <button type="submit" class="btn btn-primary">Send magic link</button>
     </form>
   </div>
 </template>
