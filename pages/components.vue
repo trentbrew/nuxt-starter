@@ -52,7 +52,7 @@
       <InputText
         v-model="state.text"
         placeholder="Join newsletter"
-        icon="mail"
+        icon="email"
       />
     </section>
 
