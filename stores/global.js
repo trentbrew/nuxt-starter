@@ -1,15 +1,13 @@
 export const useGlobalStore = defineStore('global', {
   state: () => ({
-    test: {
-      greeting: 'Welcome 👋🏾'
-    },
+    theme: 'black',
   }),
   getters: {
-    greet: (state) => state.test.greeting,
+    getTheme: state => state.theme,
   },
   actions: {
-    updateGreeting: (state, payload) => {
-      state.test.greeting = payload
-    }
-  }
+    setTheme(theme) {
+      this.theme = theme
+    },
+  },
 })
