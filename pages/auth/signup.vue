@@ -2,8 +2,9 @@
   import { createClient } from '@supabase/supabase-js'
 
   const config = useRuntimeConfig()
-  const supabaseUrl = config.public.supabaseUrl
-  const supabaseKey = config.public.supabaseKey
+  const supabaseUrl = config.public.apiUrl
+  const supabaseKey = config.public.apiKey
+
   const supabase = createClient(supabaseUrl, supabaseKey)
 
   const state = reactive({
