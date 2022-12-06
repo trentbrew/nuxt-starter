@@ -9,6 +9,7 @@
 
   const state = reactive({
     email: '',
+    password: '',
     loading: false,
   })
 
@@ -31,8 +32,12 @@
 <template>
   <div class="flexy fullscreen">
     <form class="flexy gap-6" @submit.prevent="handleLogin">
+      <Icon name="search" />
       <InputText v-model="state.email" placeholder="Email" />
-      <button type="submit" class="btn btn-primary">Send magic link</button>
+      <InputText password v-model="state.password" placeholder="Password" />
+      <button type="submit" class="btn btn-primary w-full">
+        Create account
+      </button>
     </form>
   </div>
 </template>

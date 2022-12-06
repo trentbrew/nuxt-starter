@@ -26,6 +26,10 @@
       type: String,
       default: null,
     },
+    password: {
+      type: String,
+      default: null,
+    },
   })
 </script>
 
@@ -38,19 +42,21 @@
     <span><Icon v-if="props.icon" :name="props.icon" /></span>
     <input
       @input="$emit('update:modelValue')"
-      type="text"
+      :type="props.password ? 'password' : 'text'"
       class="input input-bordered"
       :class="props.class"
       :placeholder="placeholder"
+      autocomplete="off"
     />
     <span v-if="props.suffix">{{ props.suffix }}</span>
   </label>
   <input
     v-else
     @input="$emit('update:modelValue')"
-    type="text"
+    :type="props.password ? 'password' : 'text'"
     class="input input-bordered"
     :class="props.class"
     :placeholder="placeholder"
+    autocomplete="off"
   />
 </template>
