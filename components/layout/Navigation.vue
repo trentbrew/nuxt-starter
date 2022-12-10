@@ -1,7 +1,9 @@
 <template>
   <nav class="fixed top-0 navbar bg-black/[0.4] z-10 backdrop-blur-xl">
     <div class="navbar-start">
-      <a class="btn btn-ghost normal-case text-xl">Nuxt 3 Template</a>
+      <a class="btn btn-ghost normal-case text-xl"
+        ><Icon name="star_active"
+      /></a>
     </div>
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal p-0">
@@ -17,6 +19,10 @@
 </template>
 
 <style scoped lang="scss">
-li a { @apply opacity-[0.4] rounded active:bg-base-100 active:text-white }
-.router-link-exact-active { @apply opacity-[1] bg-transparent }
+  li a {
+    @apply opacity-[0.4] rounded active:bg-base-100 active:text-white;
+  }
+  .router-link-exact-active {
+    @apply opacity-[1] bg-transparent;
+  }
 </style>
