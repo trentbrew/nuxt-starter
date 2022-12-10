@@ -1,21 +1,32 @@
 <script setup>
+  import api from '@/hooks/api'
+
   const props = defineProps({
     name: {
       type: String,
       default: '',
       requred: true,
     },
-    color: {
+    size: {
+      type: [Number, String],
+      default: 24,
+    },
+    class: {
       type: String,
       default: '',
     },
   })
 
-  const { data: icon } = useFetch(`https://iconicui.vercel.app/api/icons/${props.name}`)
+  const icon = ref(null)
 
-  console.log(icon)
+  onMounted(() => {
+    icon.value.firstChild.setAttribute('width', props.size)
+    icon.value.firstChild.setAttribute('height', props.size)
+  })
+
+  const { data: svg } = api.icons.get(props.name)
 </script>
 
 <template>
-  <div v-html="icon" :style="`${props.color ? `color: ${props.color}` : ''}`"></div>
+  <div ref="icon" :class="props.class" v-html="svg"></div>
 </template>
