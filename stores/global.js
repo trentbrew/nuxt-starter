@@ -1,6 +1,6 @@
 export const useGlobalStore = defineStore('global', {
   state: () => ({
-    greet: '👋🏾',
+    greet: '👋🏾 Welcome',
     theme: 'black',
   }),
   getters: {
