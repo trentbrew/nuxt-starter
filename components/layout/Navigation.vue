@@ -7,7 +7,6 @@
       <ul class="menu menu-horizontal p-0">
         <li><NuxtLink to="/">Home</NuxtLink></li>
         <li><NuxtLink to="/about">About</NuxtLink></li>
-        <li><NuxtLink to="/components">Components</NuxtLink></li>
       </ul>
     </div>
     <div class="navbar-end">
