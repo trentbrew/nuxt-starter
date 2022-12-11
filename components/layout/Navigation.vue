@@ -1,9 +1,7 @@
 <template>
   <nav class="fixed top-0 navbar bg-black/[0.4] z-10 backdrop-blur-xl">
     <div class="navbar-start">
-      <a class="btn btn-ghost normal-case text-xl"
-        ><Icon name="star_active"
-      /></a>
+      <a class="btn btn-ghost normal-case text-xl"> Nuxt 3 Starter</a>
     </div>
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal p-0">

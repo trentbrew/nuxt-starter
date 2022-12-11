@@ -1,5 +1,5 @@
 <script setup>
-import axios from 'axios'
+  import axios from 'axios'
 
   const props = defineProps({
     name: {
@@ -11,24 +11,12 @@ import axios from 'axios'
       type: [Number, String],
       default: 24,
     },
-    class: {
-      type: String,
-      default: '',
-    },
   })
 
-  const iconRef = ref(null)
-
-  onMounted(() => {
-    if (iconRef.value) {
-      iconRef.value.firstChild.setAttribute('width', props.size)
-      iconRef.value.firstChild.setAttribute('height', props.size)
-    }
-  })
-
-  const { data: icon } = await axios.get(`https://toybox.design/api/v1/icons/${props.name}`)
+  const { data: icon } = await axios.get(`https://toybox.design/api/v1/icons/${props.name}?size=${props.size}`)
+  console.log(icon.svg)
 </script>
 
 <template>
-  <div ref="iconRef" :class="props.class" v-html="icon.svg"></div>
+  <div v-html="icon.svg"></div>
 </template>
