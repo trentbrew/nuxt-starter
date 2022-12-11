@@ -30,14 +30,13 @@
 </script>
 
 <template>
-  <div class="flexy fullscreen">
-    <form class="flexy gap-6" @submit.prevent="handleLogin">
-      <Icon name="search" />
+  <main class="fullscreen">
+    <form class="flex flex-col gap-6" @submit.prevent="handleLogin">
       <InputText v-model="state.email" placeholder="Email" />
       <InputText password v-model="state.password" placeholder="Password" />
       <button type="submit" class="btn btn-primary w-full">
         Create account
       </button>
     </form>
-  </div>
+  </main>
 </template>
